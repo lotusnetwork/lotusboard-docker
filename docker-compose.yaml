@@ -1,0 +1,25 @@
+version: '3'
+services:
+  www:
+    image: ghcr.io/lotusnetwork/sakuraneko
+    volumes:
+      - './lotusboard:/www'
+      - './wwwlogs:/wwwlogs'
+      - './caddy.conf:/run/caddy/caddy.conf'
+      - './supervisord.conf:/run/supervisor/supervisord.conf'
+      - './crontabs.conf:/etc/crontabs/root'
+      - './.caddy:/root/.caddy'
+    links:
+      - mysql
+    ports:
+      - '80:80'
+#      - '443:443'
+    restart: always
+  mysql:
+    image: mysql:5.7.29
+    volumes:
+      - './mysql:/var/lib/mysql'
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: 'DataBase_password'
+      MYSQL_DATABASE: 'DB_Name'

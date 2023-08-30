@@ -1,0 +1,4 @@
+[submodule "lotusboard"]
+	path = lotusboard
+	url = https://github.com/lotusnetwork/lotusboard.git
+    branch = main
